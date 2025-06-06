@@ -108,6 +108,7 @@ checksum = "ace50bade8e6234aa140d9a2f552bbee1db4d353f69b8217bc503490fc1a9f26"
 [[package]]
 name = "aw_core"
 version = "0.1.0"
+source = "git+https://github.com/coremaze/awtools?rev=eb58d14#eb58d1453858e7a977be029384ef2ab11633a0bc"
 dependencies = [
  "aes",
  "base64",
@@ -127,6 +128,7 @@ dependencies = [
 [[package]]
 name = "aw_sdk"
 version = "0.1.0"
+source = "git+https://github.com/coremaze/awtools?rev=eb58d14#eb58d1453858e7a977be029384ef2ab11633a0bc"
 dependencies = [
  "aw_core",
  "thiserror",
