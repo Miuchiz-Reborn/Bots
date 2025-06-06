@@ -1,0 +1,6 @@
+[workspace]
+
+members = [
+    "crates/bot_config",
+    "crates/time_bot"
+]
