@@ -4,11 +4,11 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-aw_sdk = { git = "https://github.com/coremaze/awtools", package = "aw_sdk", rev = "eb58d14" }
 toml = "0.8.22"
-bot_config = { version = "0.1.0", path = "../bot_config" }
+bot_config = { version = "0.1.0", path = "../../libs/bot_config" }
 serde = { version = "1.0.219", features = ["derive"] }
 clap = { version = "4.5.39", features = ["derive"] }
 anyhow = "1.0.98"
 chrono = { version = "0.4.41", features = ["serde"] }
 chrono-tz = "0.10.3"
+aw_sdk = { git = "https://github.com/coremaze/awtools", package = "aw_sdk", rev = "7967957" }

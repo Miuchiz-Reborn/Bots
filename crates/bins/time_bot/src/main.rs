@@ -157,6 +157,7 @@ struct WorldTimeState {
     light_mask: String,
     light_glow: String, // "Y" for sun glow, "N" for no moon glow.
     star_opacity: u8,
+    fog_color: Color,
 }
 
 // =================================================================================================
@@ -354,6 +355,12 @@ fn update_world_for_time(time_bot: &mut TimeBot, hour: f32) {
         attributes.clouds_layer1_mask = Some("stars1".to_string());
         attributes.clouds_layer1_texture = Some("stars1".to_string());
         attributes.clouds_layer1_opacity = Some(state.star_opacity.to_string());
+        attributes.fog_red = Some(state.fog_color.r.to_string());
+        attributes.fog_green = Some(state.fog_color.g.to_string());
+        attributes.fog_blue = Some(state.fog_color.b.to_string());
+        attributes.fog_enable = Some("Y".to_string());
+        attributes.fog_maximum = Some("1200".to_string());
+        attributes.fog_minimum = Some("100".to_string());
         let _ = time_bot.instance.world_attribute_change(&attributes);
     }
 }
@@ -405,6 +412,25 @@ fn calculate_world_state(hour: f32) -> WorldTimeState {
     // 5. Calculate the opacity of the stars.
     let star_opacity = calculate_star_opacity(sun_elevation);
 
+    // 6. Fog color should be the average of the north, south, east, and west colors.
+    let fog_color = Color {
+        r: ((sky_colors.north.r as u16
+            + sky_colors.south.r as u16
+            + sky_colors.east.r as u16
+            + sky_colors.west.r as u16)
+            / 4) as u8,
+        g: ((sky_colors.north.g as u16
+            + sky_colors.south.g as u16
+            + sky_colors.east.g as u16
+            + sky_colors.west.g as u16)
+            / 4) as u8,
+        b: ((sky_colors.north.b as u16
+            + sky_colors.south.b as u16
+            + sky_colors.east.b as u16
+            + sky_colors.west.b as u16)
+            / 4) as u8,
+    };
+
     WorldTimeState {
         sky_colors,
         light_position,
@@ -413,6 +439,7 @@ fn calculate_world_state(hour: f32) -> WorldTimeState {
         light_mask,
         light_glow,
         star_opacity,
+        fog_color,
     }
 }
 

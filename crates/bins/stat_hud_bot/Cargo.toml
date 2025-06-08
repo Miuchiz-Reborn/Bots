@@ -1,0 +1,8 @@
+[package]
+name = "stat_hud_bot"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+aw_sdk = { path = "/home/a/repos/miuchiz-dev-env/awtools/aw_sdk" }
+character = { path = "../../libs/character" }

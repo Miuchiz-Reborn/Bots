@@ -1,0 +1,17 @@
+[package]
+name = "character_server"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+character = { path = "../../libs/character" }
+tokio = { version = "1", features = ["full"] }
+bytes = "1.6"
+bincode = "1.3"
+clap = { version = "4.5", features = ["derive"] }
+toml = "0.8"
+serde = { version = "1.0", features = ["derive"] }
+log = "0.4"
+env_logger = "0.11"
+aw_db = { git = "https://github.com/coremaze/awtools", package = "aw_db", rev = "7967957" }
+

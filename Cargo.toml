@@ -1,6 +1,10 @@
 [workspace]
 
 members = [
-    "crates/bot_config",
-    "crates/time_bot"
+    "crates/bins/character_server", 
+    "crates/bins/stat_hud_bot",
+    "crates/bins/time_bot",
+    "crates/bins/character_cli",
+    "crates/libs/bot_config", 
+    "crates/libs/character"
 ]
