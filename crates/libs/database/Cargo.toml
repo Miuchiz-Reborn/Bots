@@ -1,0 +1,7 @@
+[package]
+name = "database"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+aw_sdk = { git = "https://github.com/coremaze/awtools", package = "aw_sdk", rev = "dc51c26" }

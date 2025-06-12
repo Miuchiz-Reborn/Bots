@@ -13,5 +13,4 @@ toml = "0.8"
 serde = { version = "1.0", features = ["derive"] }
 log = "0.4"
 env_logger = "0.11"
-aw_db = { git = "https://github.com/coremaze/awtools", package = "aw_db", rev = "7967957" }
-
+aw_db = { git = "https://github.com/coremaze/awtools", package = "aw_db", rev = "dc51c26" }

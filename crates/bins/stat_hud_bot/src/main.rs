@@ -1,3 +1,4 @@
+use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
 use aw_sdk::{
@@ -27,6 +28,24 @@ struct PlayerHudState {
     boredom: StatBar,
 }
 
+use clap::Parser;
+
+#[derive(Debug, Serialize, Deserialize, Clone)]
+pub struct StatsHudBotConfig {
+    pub host: String,
+    pub port: u16,
+    pub character_host: String,
+    pub character_port: u16,
+
+    pub owner_id: u32,
+    pub privilege_password: String,
+}
+
+#[derive(Debug, Serialize, Deserialize, Parser)]
+pub struct Args {
+    config_path: String,
+}
+
 struct StatsHudBot {
     instance: AwInstance,
     client: CharacterClient,
@@ -39,10 +58,12 @@ struct StatsHudBot {
 }
 
 impl StatsHudBot {
-    fn new() -> Self {
+    fn new(config: StatsHudBotConfig) -> Self {
+        let character_server_address =
+            format!("{}:{}", config.character_host, config.character_port);
         Self {
-            instance: AwInstance::new("127.0.0.1", 6670).unwrap(),
-            client: CharacterClient::connect("127.0.0.1:6675").unwrap(),
+            instance: AwInstance::new(&config.host, config.port).unwrap(),
+            client: CharacterClient::connect(&character_server_address).unwrap(),
             hud_states: HashMap::new(),
             session_to_citizen: HashMap::new(),
             citizen_to_session: HashMap::new(),
@@ -315,9 +336,11 @@ fn hud_stat_size_x(stat: f32) -> u32 {
     (min_size + (stat * scale_factor)) as u32
 }
 
-fn main() {
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let args = Args::parse();
+    let config = toml::from_str::<StatsHudBotConfig>(&std::fs::read_to_string(args.config_path)?)?;
     loop {
-        let mut bot = StatsHudBot::new();
+        let mut bot = StatsHudBot::new(config.clone());
         let result = bot.run();
         match result {
             Ok(_) => {}

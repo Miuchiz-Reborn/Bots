@@ -5,6 +5,11 @@ members = [
     "crates/bins/stat_hud_bot",
     "crates/bins/time_bot",
     "crates/bins/character_cli",
+    "crates/bins/core_maze_bot",
+    "crates/bins/magic_forest_bot",
+    "crates/bins/mall_race_bot",
     "crates/libs/bot_config", 
-    "crates/libs/character"
+    "crates/libs/character",
+    "crates/libs/game_manager",
+    "crates/libs/obstacle_course"
 ]

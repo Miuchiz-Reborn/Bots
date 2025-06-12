@@ -90,6 +90,11 @@ impl TimeBot {
                 if let aw_sdk::AwEvent::Message(message_info) = event {
                     let _ = handle_message(self, &message_info);
                 }
+                if let aw_sdk::AwEvent::UniverseDisconnected | aw_sdk::AwEvent::WorldDisconnected =
+                    event
+                {
+                    return Err(SdkError::connection_state("Universe or world disconnected"));
+                }
             }
 
             // Handle automatic time advancement if enabled.
