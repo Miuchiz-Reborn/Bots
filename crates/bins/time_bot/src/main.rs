@@ -87,7 +87,7 @@ impl TimeBot {
         loop {
             let events = self.instance.tick();
             for event in events {
-                if let aw_sdk::AwEvent::Message(message_info) = event {
+                if let aw_sdk::AwEvent::Message(message_info) = &event {
                     let _ = handle_message(self, &message_info);
                 }
                 if let aw_sdk::AwEvent::UniverseDisconnected | aw_sdk::AwEvent::WorldDisconnected =
